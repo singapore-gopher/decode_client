@@ -13,7 +13,7 @@ func main() {
 }
 
 func stage1(teamName string) {
-	resp, err := http.Get(`http://localhost:4000/stage1/data.json`)
+	resp, err := http.Get(`http://10.0.2.235:4000/stage1/data.json`)
 	if err != nil {
 		log.Fatalf(`could not get stage1 data; err=%v`, err)
 	}
@@ -26,7 +26,7 @@ func stage1(teamName string) {
 	// do something with the body and figure out the result
 
 	buffer := bytes.NewBufferString(`{"team":"` + teamName + `","solutions":[]}`) // send back your data
-	resp, err = http.Post(`http://localhost:4000/stage1/submit.json`, `application/json`, buffer)
+	resp, err = http.Post(`http://10.0.2.235:4000/stage1/submit.json`, `application/json`, buffer)
 	if err != nil {
 		log.Fatalf(`could submit to stage1; err=%v`, err)
 	}
@@ -40,7 +40,7 @@ func stage1(teamName string) {
 
 func register(teamName string) {
 	buffer := bytes.NewBufferString(`{"name":"` + teamName + `"}`)
-	resp, err := http.Post(`http://localhost:4000/register.json`, `application/json`, buffer)
+	resp, err := http.Post(`http://10.0.2.235:4000/register.json`, `application/json`, buffer)
 	if err != nil {
 		log.Fatalf(`could not register; err=%v`, err)
 	}
