@@ -16,3 +16,4 @@ To make it easier for you, there is a method already in the client to do so.
 You can use stream.IsMagicValue(string)bool to decide whether a value is of interest, and you'll find some
 hints in the code itself.
 
+The part to be modified starts @ L73: func handleConn
