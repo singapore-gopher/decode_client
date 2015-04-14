@@ -9,7 +9,7 @@ JSON Decode challenge
 
 You have a bunch of sensors in your smart home. Each sensor gives you exactly 4 values. You usually poll them using http GET. Some sensors started to fail, and did not send all the values anymore. Identify the failed sensors in your request to avoid a disaster!
 
-### GET http://forgot_to_update_hostname/stage1/data.json
+### GET http://10.0.2.235:4000/stage1/data.json
 ```bash
 > GET /stage1/data.json HTTP/1.1
 > User-Agent: curl/7.35.0
@@ -56,7 +56,7 @@ You have a bunch of sensors in your smart home. Each sensor gives you exactly 4 
 }
 ```
 
-### POST http://forgot_to_update_hostname/stage1/submit.json
+### POST http://10.0.2.235:4000/stage1/submit.json
 ```bash
 > POST /stage1/submit.json HTTP/1.1
 > User-Agent: curl/7.35.0
