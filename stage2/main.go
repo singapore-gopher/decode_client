@@ -9,13 +9,13 @@ import (
 
 func main() {
 	register(`mark`)
-	stage1(`mark`)
+	stage2(`mark`)
 }
 
-func stage1(teamName string) {
-	resp, err := http.Get(`http://localhost:4000/stage1/data.json`)
+func stage2(teamName string) {
+	resp, err := http.Get(`http://localhost:4000/stage2/data.json`)
 	if err != nil {
-		log.Fatalf(`could not get stage1 data; err=%v`, err)
+		log.Fatalf(`could not get stage2 data; err=%v`, err)
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	resp.Body.Close()
@@ -25,17 +25,17 @@ func stage1(teamName string) {
 
 	// do something with the body and figure out the result
 
-	buffer := bytes.NewBufferString(`{"team":"` + teamName + `","solutions":[]}`) // send back your data
-	resp, err = http.Post(`http://localhost:4000/stage1/submit.json`, `application/json`, buffer)
+	buffer := bytes.NewBufferString(`{"team":"` + teamName + `","faulty":[]}`) // send back your data
+	resp, err = http.Post(`http://localhost:4000/stage2/submit.json`, `application/json`, buffer)
 	if err != nil {
-		log.Fatalf(`could submit to stage1; err=%v`, err)
+		log.Fatalf(`could submit to stage2; err=%v`, err)
 	}
 	body, err = ioutil.ReadAll(resp.Body)
 	resp.Body.Close()
 	if err != nil {
 		log.Fatalf(`could not stage 1 submit response; err=%v`, err)
 	}
-	log.Printf(`stage1: server responsed: %q`, body)
+	log.Printf(`stage2: server responsed: %q`, body)
 }
 
 func register(teamName string) {
