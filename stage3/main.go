@@ -57,7 +57,7 @@ func (self *response) submit(url, teamName string) error {
 }
 
 func main() {
-	conn, err := net.Dial("tcp", ":"+stream.Port)
+	conn, err := net.Dial("tcp", "10.0.2.235:4001")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -94,7 +94,7 @@ func handleConn(conn io.ReadWriteCloser) error {
 
 	}
 
-	url := "http://forgot_to_update_IP:4000/stage3/submit.json" // the server's url
+	url := "http://10.0.2.235:4000/stage3/submit.json" // the server's url
 	teamName := "YOUR TEAM NAME HERE !!!"                       // your team's name
 	err := solution.submit(url, teamName)                       //
 	if err != nil {
