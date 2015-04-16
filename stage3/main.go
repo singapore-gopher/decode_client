@@ -86,12 +86,42 @@ func handleConn(conn io.ReadWriteCloser) error {
 		Values: []string{},
 	}
 
+// hints:
+	// • Decode to stream.Packet objects. readme: http://.../../readme.md
+	// • Use encoding/json's decoder
+	// • To check if the received packet contains "magic"
+	//   use stream.IsMagicValue(value string) bool
+	// • Use response.Submit in the end, it posts your solution with your team's name.
+
+	// create the json stream decoder
+	dec := json.NewDecoder(conn)
+
+	// you will collect 3 magic values in this struct
+	solution := &response{
+		Values: []string{},
+	}
+
 	for {
+		p := &stream.Packet{}
+		err := dec.Decode(p)
+		if err != nil {
+			if err == io.EOF {
+				return err
+			}
+			dec = json.NewDecoder(conn)
+			continue
+		}
 
 		// For checking a packet's value use stream.IsMagicValue()
+		if stream.IsMagicValue(p.Value) {
+			fmt.Println("yeah!")
 
-		// You can use solution.addValue()
-
+			// hint: you can use solution.addValue()
+			solution.addValue(p.Value)
+			if len(solution.Values) == 3 {
+				break
+			}
+		}
 	}
 
 	url := "http://10.0.2.235:4000/stage3/submit.json" // the server's url
